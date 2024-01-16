@@ -1,14 +1,16 @@
 import pygame
 from settings import *
 from player import Player
-import math
-from map import world_map
+from sprite_objects import *
+from ray_casting import ray_casting
 from drawing import Drawing
 from menu import MainMenu
 
 pygame.font.init()
 pygame.init()
 screen = pygame.display.set_mode(WINDOW_SIZE)
+
+sprites = Spites()
 clock = pygame.time.Clock()
 player = Player()
 drawing = Drawing(screen)
@@ -34,7 +36,8 @@ while True:
         screen.fill(BLACK)
 
         drawing.background(player.angle)
-        drawing.world(player.pos, player.angle)
+        walls = ray_casting(player, drawing.textures)
+        drawing.world(walls + [obj.object_locate(player, walls) for obj in sprites.list_of_objects])
         drawing.fps(clock)
 
         pygame.display.flip()

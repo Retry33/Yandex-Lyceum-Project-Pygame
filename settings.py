@@ -18,13 +18,18 @@ DIST = NUM_RAYS / (2 * math.tan(HALF_FOV))
 PROJ_COEFF = 3 * DIST * TILE
 SCALE = WINDOW_WIDTH // NUM_RAYS
 
+# sprite settings
+DOUBLE_PI = 2 * math.pi
+CENTER_RAY = NUM_RAYS // 2 - 1
+FAKE_RAYS = 100
+
 # texture settings (1200 x 1200)
 TEXTURE_WIDTH = 1200
 TEXTURE_HEIGHT = 1200
 TEXTURE_SCALE = TEXTURE_WIDTH // TILE
 
 # player settings
-player_pos = (HALF_WIDTH, HALF_HEIGHT)
+player_pos = (HALF_WIDTH // 4, HALF_HEIGHT - 50)
 player_angle = 0
 player_speed = 2
 
