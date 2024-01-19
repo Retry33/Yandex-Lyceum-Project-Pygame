@@ -9,6 +9,7 @@ from menu import MainMenu
 pygame.font.init()
 pygame.init()
 screen = pygame.display.set_mode(WINDOW_SIZE)
+pygame.mouse.set_visible(False)
 
 sprites = Spites()
 clock = pygame.time.Clock()
@@ -37,7 +38,7 @@ while True:
 
         drawing.background(player.angle)
         walls = ray_casting(player, drawing.textures)
-        drawing.world(walls + [obj.object_locate(player, walls) for obj in sprites.list_of_objects])
+        drawing.world(walls + [obj.object_locate(player) for obj in sprites.list_of_objects])
         drawing.fps(clock)
 
         pygame.display.flip()
