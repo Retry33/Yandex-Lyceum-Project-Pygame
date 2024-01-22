@@ -11,9 +11,9 @@ pygame.init()
 screen = pygame.display.set_mode(WINDOW_SIZE)
 pygame.mouse.set_visible(False)
 
-sprites = Spites()
+sprites = Sprites()
 clock = pygame.time.Clock()
-player = Player()
+player = Player(sprites)
 drawing = Drawing(screen)
 
 menu = MainMenu(screen)

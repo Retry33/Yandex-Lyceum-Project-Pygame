@@ -14,9 +14,9 @@ class Drawing:
 
     def background(self, angle):
         sky_offset = -10 * math.degrees(angle) % WINDOW_WIDTH
-        self.screen.blit(self.textures['S'], (sky_offset, 0))
-        self.screen.blit(self.textures['S'], (sky_offset - WINDOW_WIDTH, 0))
-        self.screen.blit(self.textures['S'], (sky_offset + WINDOW_WIDTH, 0))
+        # self.screen.blit(self.textures['S'], (sky_offset, 0))
+        # self.screen.blit(self.textures['S'], (sky_offset - WINDOW_WIDTH, 0))
+        # self.screen.blit(self.textures['S'], (sky_offset + WINDOW_WIDTH, 0))
         pygame.draw.rect(self.screen, DARK_GRAY, (0, HALF_HEIGHT, WINDOW_WIDTH, HALF_HEIGHT))
 
     def world(self, world_objects):
