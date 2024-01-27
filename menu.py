@@ -68,3 +68,22 @@ class MainMenu:
                         elif self.selected_button == 1:
                             return "HARD"
         return None
+
+
+class FinalMenu:
+    def __init__(self, screen):
+        self.background_image = pygame.image.load("img/wall1.jpg")
+        self.background_image = pygame.transform.scale(self.background_image, WINDOW_SIZE)
+        self.screen = screen
+        self.font = pygame.font.Font("fonts/SquaredanceFontV1-Regular.ttf", 96)
+        self.text_color = pygame.Color("White")
+
+    def draw(self):
+        self.screen.blit(self.background_image, (0, 0))
+        self.draw_text("Congratulations!", WINDOW_SIZE[0] // 2, WINDOW_SIZE[1] // 2 - 40)
+        self.draw_text("YOUR SCORE 1000", WINDOW_SIZE[0] // 2, WINDOW_SIZE[1] // 2 + 40)
+
+    def draw_text(self, text, x, y):
+        text_surface = self.font.render(text, True, self.text_color)
+        text_rect = text_surface.get_rect(center=(x, y))
+        self.screen.blit(text_surface, text_rect)

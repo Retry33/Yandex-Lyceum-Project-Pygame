@@ -5,6 +5,7 @@ from sprite_objects import *
 from ray_casting import ray_casting
 from drawing import Drawing
 from menu import MainMenu
+from final import check_final_position
 
 pygame.font.init()
 pygame.init()
@@ -34,6 +35,7 @@ while True:
                 if event.key == pygame.K_ESCAPE:
                     current_screen = "menu"
         player.movement()
+        check_final_position(player)
         screen.fill(BLACK)
 
         drawing.background(player.angle)
