@@ -7,16 +7,16 @@ class Drawing:
     def __init__(self, screen):
         self.screen = screen
         self.font = pygame.font.SysFont('Arial', 36, bold=True)
-        self.textures = {1: pygame.image.load('img/306.jpg').convert(),
-                         2: pygame.image.load('img/2.png').convert(),
-                         'S': pygame.image.load('img/306.jpg').convert()
+        self.textures = {1: pygame.image.load('img/wall1.jpg').convert(),
+                         2: pygame.image.load('img/wall2.png').convert(),
+                         'S': pygame.image.load('img/MoonSky.png').convert()
                          }
 
     def background(self, angle):
         sky_offset = -10 * math.degrees(angle) % WINDOW_WIDTH
-        # self.screen.blit(self.textures['S'], (sky_offset, 0))
-        # self.screen.blit(self.textures['S'], (sky_offset - WINDOW_WIDTH, 0))
-        # self.screen.blit(self.textures['S'], (sky_offset + WINDOW_WIDTH, 0))
+        self.screen.blit(self.textures['S'], (sky_offset, 0))
+        self.screen.blit(self.textures['S'], (sky_offset - WINDOW_WIDTH, 0))
+        self.screen.blit(self.textures['S'], (sky_offset + WINDOW_WIDTH, 0))
         pygame.draw.rect(self.screen, DARK_GRAY, (0, HALF_HEIGHT, WINDOW_WIDTH, HALF_HEIGHT))
 
     def world(self, world_objects):

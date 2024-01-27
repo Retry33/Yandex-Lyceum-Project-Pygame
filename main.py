@@ -24,7 +24,7 @@ while True:
     if current_screen == "menu":
         menu.draw()
         action = menu.handle_events()
-        if action == "play":
+        if action == "EASY" or action == "HARD":
             current_screen = "game"
     elif current_screen == "game":
         for event in pygame.event.get():
