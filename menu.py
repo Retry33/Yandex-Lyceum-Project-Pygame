@@ -1,4 +1,5 @@
 import pygame
+import sqlite3
 from settings import WINDOW_SIZE
 
 
@@ -75,13 +76,31 @@ class FinalMenu:
         self.background_image = pygame.image.load("img/wall1.jpg")
         self.background_image = pygame.transform.scale(self.background_image, WINDOW_SIZE)
         self.screen = screen
+        self.flag = True
         self.font = pygame.font.Font("fonts/SquaredanceFontV1-Regular.ttf", 96)
         self.text_color = pygame.Color("White")
 
-    def draw(self):
+    def draw(self, score):
+        conn = sqlite3.connect('database/results.sqlite3')
+        cursor = conn.cursor()
+        cursor.execute('SELECT MIN(score) FROM statistics')
+        best_score = cursor.fetchone()[0]
+
+        if best_score is None:
+            best_score = score
+
+        if self.flag:
+            if best_score >= score:
+                cursor.execute('INSERT INTO statistics (score) VALUES (?)', (score,))
+                conn.commit()
+                self.flag = False
+
+        conn.close()
+
         self.screen.blit(self.background_image, (0, 0))
         self.draw_text("Congratulations!", WINDOW_SIZE[0] // 2, WINDOW_SIZE[1] // 2 - 40)
-        self.draw_text("YOUR SCORE 1000", WINDOW_SIZE[0] // 2, WINDOW_SIZE[1] // 2 + 40)
+        self.draw_text(f"BEST SCORE {min(score, best_score)}s", WINDOW_SIZE[0] // 2, WINDOW_SIZE[1] // 2 + 40)
+        self.draw_text(f"YOUR SCORE {score}s!", WINDOW_SIZE[0] // 2, WINDOW_SIZE[1] // 2 + 120)
 
     def draw_text(self, text, x, y):
         text_surface = self.font.render(text, True, self.text_color)

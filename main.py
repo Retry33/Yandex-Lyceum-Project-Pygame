@@ -1,3 +1,4 @@
+import time
 import pygame
 from settings import *
 from player import Player
@@ -16,9 +17,10 @@ sprites = Sprites()
 clock = pygame.time.Clock()
 player = Player(sprites)
 drawing = Drawing(screen)
+flag = True
 
 menu = MainMenu(screen)
-
+current_time = 0
 current_screen = "menu"
 
 while True:
@@ -28,6 +30,9 @@ while True:
         if action == "EASY" or action == "HARD":
             current_screen = "game"
     elif current_screen == "game":
+        if flag:
+            current_time = time.ctime(time.time()).split()[3]
+            flag = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 exit()
@@ -35,7 +40,7 @@ while True:
                 if event.key == pygame.K_ESCAPE:
                     current_screen = "menu"
         player.movement()
-        check_final_position(player)
+        check_final_position(player, current_time)
         screen.fill(BLACK)
 
         drawing.background(player.angle)
